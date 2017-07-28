@@ -137,22 +137,23 @@ name, strict, or method) are provided."""
                     s.close()
                     continue
             info = list(info)
-            info[0] = 'Computer'
-            info[0] = str(info[0])
-            info[0] = info[0][2:(len(info[0])-1)]
-            print('Info[0] is {}'.format(info[0]))
-            info[0] = info[0].strip('\\x00')
-            print('Info[0] is {}'.format(info[0]))
+#            info[0] = 'Computer'
+            foundname = str(info[0])
+            foundname = foundname.split("\\x00")[0]
+            foundname = foundname[2:(len(foundname))]
+            # print('name is {}'.format(info[0]))
+            # info[0] = info[0].strip('\\x00')
+            # print('Info[0] is {}'.format(info[0]))
             # /\ Inserted
-            print('Name parsed is {}'.format(name))
-            if info[0] != name:
+            print('Name parsed is {}'.format(foundname))
+            if foundname != name:
                 if debug:
                     print("Warning; the brick found does not match the name provided.")
                 if strict:
                     s.close()
                     continue
-            return b
-        except:
+            return b        
+	except:
             if debug:
                 traceback.print_exc()
                 print("Failed to connect to possible brick")
