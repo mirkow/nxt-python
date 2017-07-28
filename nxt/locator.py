@@ -115,7 +115,8 @@ name, strict, or method) are provided."""
         name	= conf.get('Brick', 'name')
         strict	= bool(int(conf.get('Brick', 'strict')))
         method	= eval('Method(%s)' % conf.get('Brick', 'method'))
-    if not strict: strict = True
+    if strict is None:
+        strict = True
     if not method: method = Method()
     if debug:
         print("Host: %s Name: %s Strict: %s" % (host, name, str(strict)))
